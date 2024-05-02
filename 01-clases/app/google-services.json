@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "751934175510",
+    "project_id": "marmen-2024a-sw-gr2",
+    "storage_bucket": "marmen-2024a-sw-gr2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:751934175510:android:c76a802593bdbd744ef837",
+        "android_client_info": {
+          "package_name": "com.example.a2024aswgr2_mm"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLrqeEQUBK_Py48thlRhV9eLZ0IkEEGfY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
