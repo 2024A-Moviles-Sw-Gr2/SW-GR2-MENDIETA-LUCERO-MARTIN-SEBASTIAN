@@ -49,6 +49,53 @@ fun main() {
     //calcularSueldo(sueldo, tasa, bonoEspecial)
     calcularSueldo(10.00, bonoEspecial = 20.00)
     calcularSueldo(bonoEspecial = 30.00, sueldo = 10.00, tasa = 14.00)
+
+    // Instanciación de clases
+    val sumaUno = Suma(1, 1)
+    val sumaDos = Suma(null, 1)
+    val sumaTres = Suma(1, null)
+    val sumaCuatro = Suma(null, null)
+    sumaUno.sumar()
+    sumaDos.sumar()
+    sumaTres.sumar()
+    sumaCuatro.sumar()
+    println(Suma.pi)
+    println(Suma.elevarAlCuadrado(2))
+    println(Suma.historialSumas)
+
+    // Arreglos
+        // Estaticos
+    val arregloEstatico: Array<Int> = arrayOf<Int>(1, 2, 3)
+    println(arregloEstatico)
+
+        // Dinamicos
+    val arregloDinamico : ArrayList<Int> = arrayListOf<Int>(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+    println(arregloDinamico)
+
+        // Metodos
+    arregloDinamico.add(11)
+    arregloDinamico.add(12)
+    println(arregloDinamico)
+
+        // Operadores
+            // FOR EACH (devuelve Unit)
+    val respuestaForEach: Unit = arregloDinamico
+        .forEach {
+            valorActual: Int ->
+            println("Valor actual: ${valorActual}")
+        }
+
+    arregloDinamico.forEach{ println("Valor actual (it): ${it}") }
+
+            // MAP (Devuelve un nuevo arreglo con las especificaciones en la funcion)
+    val respuestaMap: List<Double> = arregloDinamico
+        .map { valorActual: Int ->
+            return@map valorActual.toDouble() + 100.0
+        }
+    println(respuestaMap)
+
+    val respuestaMapDos = arregloDinamico.map{ it + 15 }
+    println(respuestaMapDos)
 }
 
 // void -> Unit (No devuelve nada)
@@ -100,6 +147,7 @@ abstract class Numeros(
 }
 
 class Suma(
+    // Constructor primario
     unoParametro:Int,
     dosParametro: Int
 ):Numeros( //Clase padre, Numeros (extendiendo)
@@ -116,6 +164,26 @@ class Suma(
         this.soyPublicoExplicito
         soyPublicoImplicito // this. es opcional tanto en atributos como en métodos
     }
+
+    // Constructores secundarios
+    constructor (
+        uno: Int?,
+        dos: Int?
+
+        // El "this" se usa para instanciar la clase del constructor con los parámetros
+        // que se especifiquen.
+    ):this(
+        if (uno == null) 0 else uno,
+        if (dos == null) 0 else dos
+    )
+
+    constructor (
+        uno: Int?,
+        dos: Int
+    ):this(
+        if (uno == null) 0 else uno,
+        dos
+    )
 
     // public fun sumer():Int {}
     fun sumar():Int {
