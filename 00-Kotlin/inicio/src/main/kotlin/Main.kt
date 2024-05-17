@@ -96,6 +96,40 @@ fun main() {
 
     val respuestaMapDos = arregloDinamico.map{ it + 15 }
     println(respuestaMapDos)
+
+            // FILTER (Devuelve un nuevo arreglo filtrado)
+    val respuestaFilter: List<Int> = arregloDinamico
+        .filter { valorActual: Int ->
+            val mayoresACinco: Boolean = valorActual > 5
+            return@filter mayoresACinco
+        }
+    println(respuestaFilter)
+
+    val respuestaFilterDos = arregloDinamico.filter { it <= 5 }
+    println(respuestaFilterDos)
+
+            // OR y AND
+            // OR -> ANY (Alguno cumple?)
+            // AND -> ALL (Todos cumplen?)
+    val respuestaAny: Boolean = arregloDinamico
+        .any { valorActual: Int ->
+            return@any (valorActual > 5)
+        }
+    println(respuestaAny)
+
+    val respuestaAll: Boolean = arregloDinamico
+        .all { valorActual: Int ->
+            return@all (valorActual > 5)
+        }
+    println(respuestaAll)
+
+            // REDUCE -> Devuelve un valor acumulado
+            // Valor acumulado = 0 (siempre inicia en 0 en Kotlin)
+    val respuestaReduce: Int = arregloDinamico
+        .reduce { acumulado: Int, valorActual: Int ->
+            return@reduce (acumulado + valorActual)
+        }
+    println(respuestaReduce)
 }
 
 // void -> Unit (No devuelve nada)
