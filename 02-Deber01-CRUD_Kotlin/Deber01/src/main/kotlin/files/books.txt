@@ -1,0 +1,6 @@
+libro 10;Abelardo;12.5;2024-05-26;true
+libro 20;Abelardo;10.33;2024-05-26;true
+libro 30;Abelardo;18.55;2024-05-26;true
+Libro GENIAL 1;Howard Phillips Lovecraft;12.5;2024-05-26;true
+libro 2;Abelardo;10.33;2024-05-26;true
+Libro GENIAL;Howard Phillips Lovecraft;18.55;2024-05-26;true
