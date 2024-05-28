@@ -1,5 +1,6 @@
 package entities
 
+import Persistence
 import java.util.Date
 
 class Book (
@@ -12,6 +13,7 @@ class Book (
 
     init {
         booksList.add(this)
+        this.author.booksWritten.add(this)
     }
 
     fun getBookInfo(): String {
@@ -19,7 +21,7 @@ class Book (
                 "Title: ${this.title} \n" +
                 "Author: ${this.author.name} \n" +
                 "Price: ${this.price} \n" +
-                "Publication Date: ${this.publicationDate} \n" +
+                "Publication Date: ${Persistence.dateFormat.format(this.publicationDate)} \n" +
                 "Discontinued: ${this.discontinued} \n"
     }
 

@@ -7,7 +7,7 @@ class Author (
     var age: Int,
     var nationality: String,
     var literaryGenre: String,
-    var booksWritten: ArrayList<Book>
+    var booksWritten: ArrayList<Book> = ArrayList()
 ) {
 
     init {
