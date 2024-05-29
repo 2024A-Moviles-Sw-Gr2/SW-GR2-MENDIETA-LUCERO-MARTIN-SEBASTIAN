@@ -1,0 +1,2 @@
+Call of Cthulhu;Lovecraft;43.43;1998-08-12;true
+Necronomicon;Lovecraft;12.45;1978-06-15;false

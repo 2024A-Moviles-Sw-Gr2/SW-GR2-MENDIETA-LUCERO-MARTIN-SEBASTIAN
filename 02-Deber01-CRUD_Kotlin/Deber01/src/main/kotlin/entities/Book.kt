@@ -20,12 +20,12 @@ class Book (
         return "" +
                 "Title: ${this.title} \n" +
                 "Author: ${this.author.name} \n" +
-                "Price: ${this.price} \n" +
+                "Price: $${this.price} \n" +
                 "Publication Date: ${Persistence.dateFormat.format(this.publicationDate)} \n" +
                 "Discontinued: ${this.discontinued} \n"
     }
 
-    fun updateBook(attribute: Int, newValue: Any): String {
+    fun updateBook(attribute: Int, newValue: String): String {
         /*
         * Each attribute has an assigned Int value:
         * 0 -> title
@@ -39,30 +39,30 @@ class Book (
 
         when (attribute) {
             (0) -> {
-                this.title = newValue as String
+                this.title = newValue
             }
             (1) -> {
-                val auxAuthor: Author? = Author.findAuthor(newValue.toString())
+                val auxAuthor: Author? = Author.findAuthor(newValue)
                 if (auxAuthor != null) {
                     this.author = auxAuthor
                 } else {
-                    return "Author not found\n"
+                    return "** Author not found\n"
                 }
             }
             (2) -> {
-                this.price = newValue as Double
+                this.price = newValue.toDouble()
             }
             (3) -> {
-                this.publicationDate = newValue as Date
+                this.publicationDate = Persistence.dateFormat.parse(newValue)
             }
             (4) -> {
-                this.discontinued = newValue as Boolean
+                this.discontinued = newValue.toBoolean()
             }
             else -> {
-                return "The attribute does not exist"
+                return "** The attribute does not exist"
             }
         }
-        return ""
+        return "** Book updated"
     }
 
     companion object {
