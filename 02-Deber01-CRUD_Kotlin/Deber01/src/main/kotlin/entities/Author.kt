@@ -23,7 +23,7 @@ class Author (
                 "Books: ${this.booksWritten.map { it.title }}"
     }
 
-    fun updateBook(attribute: Int, newValue: Any): String {
+    fun updateAuthor(attribute: Int, newValue: String): String {
         /*
         * Each attribute has an assigned Int value, except "booksWritten":
         * 0 -> name
@@ -36,22 +36,22 @@ class Author (
 
         when (attribute) {
             (0) -> {
-                this.name = newValue as String
+                this.name = newValue
             }
             (1) -> {
-                this.age = newValue as Int
+                this.age = newValue.toInt()
             }
             (2) -> {
-                this.nationality = newValue as String
+                this.nationality = newValue
             }
             (3) -> {
-                this.literaryGenre = newValue as String
+                this.literaryGenre = newValue
             }
             else -> {
-                return "The attribute does not exist"
+                return "** The attribute does not exist"
             }
         }
-        return ""
+        return "** Author updated"
     }
 
     companion object {
