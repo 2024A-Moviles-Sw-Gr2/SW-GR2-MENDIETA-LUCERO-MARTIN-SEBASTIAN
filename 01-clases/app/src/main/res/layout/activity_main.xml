@@ -22,10 +22,12 @@
         android:id="@+id/btn_ciclo_vida"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
         android:text="C. Vida"
         app:layout_constraintBottom_toBottomOf="@+id/textView"
+        app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toTopOf="@+id/textView"
-        tools:layout_editor_absoluteX="281dp" />
+        app:layout_constraintVertical_bias="0.517" />
 
     <Button
         android:id="@+id/btn_ir_list_view"
