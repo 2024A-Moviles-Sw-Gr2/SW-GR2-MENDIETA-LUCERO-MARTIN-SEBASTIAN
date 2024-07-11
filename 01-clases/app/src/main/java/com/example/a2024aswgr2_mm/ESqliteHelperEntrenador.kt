@@ -39,5 +39,68 @@ class ESqliteHelperEntrenador(
         basedatosEscritura.close()
         return resultadoGuardar.toInt() != -1
     }
+    fun eliminarEntrenadorFormulario(id:Int):Boolean{
+        val conexionEscritura = writableDatabase
+        // Consulta SQL: where .... ID=? AND NOMBRE=? [?=1, ?=2]
+        val parametrosConsultaDelete = arrayOf(id.toString())
+        val resultadoEliminacion = conexionEscritura.delete(
+            "ENTRENADOR",
+            "id=?",
+            parametrosConsultaDelete
+        )
+        conexionEscritura.close()
+        return resultadoEliminacion.toInt() != -1
+    }
 
+    fun actualizarEntrenadorFormulario(nombre:String, descripcion:String, id:Int):Boolean {
+        val conexionEscritura = writableDatabase
+        val valoresAActualizar = ContentValues()
+        valoresAActualizar.put("nombre", nombre)
+        valoresAActualizar.put("descripcion", descripcion)
+
+        val parametrosConsultaActualizar = arrayOf(id.toString())
+        val resultadoActualizacion = conexionEscritura.update(
+            "ENTRENADOR",
+            valoresAActualizar,
+            "id=?",
+            parametrosConsultaActualizar
+        )
+        conexionEscritura.close()
+        return resultadoActualizacion.toInt() != -1
+    }
+
+    fun consultarEntrenadorPorID(id:Int):BEntrenador?{
+        val baseDatosLectura = readableDatabase
+        val scriptConsultaLectura = """
+            SELECT * FROM ENTRENADOR WHERE ID = ?
+        """.trimIndent()
+        val arregloParametrosConsultaLectura = arrayOf(
+            id.toString()
+        )
+        val resultadoConsultaLectura = baseDatosLectura.rawQuery(
+            scriptConsultaLectura,
+            arregloParametrosConsultaLectura
+        )
+        // Lógica de búsqueda
+        // Recibimos un arreglo que puede ser nulo
+        // Llenar un arreglo de Entrenadores
+        // Si está vacío, el arreglo no tiene elementos
+        val existeAlMenosUno = resultadoConsultaLectura.moveToFirst()
+        val arregloRespuesta = arrayListOf<BEntrenador>()
+        if(existeAlMenosUno) {
+            do{
+                val entrenador = BEntrenador(
+                    // La consulta devuelve un arreglo con cada valor en el mismo orden que las
+                    // columnas en la base de datos
+                    resultadoConsultaLectura.getInt(0),
+                    resultadoConsultaLectura.getString(1),
+                    resultadoConsultaLectura.getString(2)
+                )
+                arregloRespuesta.add(entrenador)
+            } while(resultadoConsultaLectura.moveToNext())
+        }
+        resultadoConsultaLectura.close()
+        baseDatosLectura.close()
+        return arregloRespuesta[0]
+    }
 }
