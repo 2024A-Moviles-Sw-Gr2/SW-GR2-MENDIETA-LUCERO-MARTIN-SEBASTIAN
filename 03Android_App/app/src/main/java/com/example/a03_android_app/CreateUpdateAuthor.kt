@@ -1,5 +1,6 @@
 package com.example.a03_android_app
 
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,25 +17,22 @@ class CreateUpdateAuthor : AppCompatActivity() {
         val name = findViewById<EditText>(R.id.input_author_name)
         val age = findViewById<EditText>(R.id.input_author_age)
         val literaryGenre = findViewById<EditText>(R.id.input_author_literary_genre)
-        val mainActivity = MainActivity()
         val selectedAuthor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            intent.getParcelableExtra("DATA", AuthorEntity::class.java)
+            intent.getParcelableExtra("selectedAuthor", AuthorEntity::class.java)
         } else {
-            intent.getParcelableExtra<AuthorEntity>("DATA")
+            intent.getParcelableExtra<AuthorEntity>("selectedAuthor")
         }
 
         if(selectedAuthor == null) {
             // Create an author
             val btnCreateUpdateAuthor = findViewById<Button>(R.id.btn_create_update_author)
             btnCreateUpdateAuthor.setOnClickListener{
-                val createAuthorResponse = DataBase.tables!!.createAuthor(
+                DataBase.tables!!.createAuthor(
                     name.text.toString(),
                     age.text.toString().toInt(),
-                    literaryGenre.toString()
+                    literaryGenre.text.toString()
                 )
-                mainActivity.updateAllAuthorsList()
-
-                if(createAuthorResponse) showSnackBar("Autor ${name.text} creado")
+                goToActivity(MainActivity::class.java)
             }
         } else {
             name.setText(selectedAuthor.name)
@@ -44,26 +42,22 @@ class CreateUpdateAuthor : AppCompatActivity() {
             // Update an author
             val btnCreateUpdateAuthor = findViewById<Button>(R.id.btn_create_update_author)
             btnCreateUpdateAuthor.setOnClickListener{
-                val updateAuthorResponse = DataBase.tables!!.updateAuthor(
+                DataBase.tables!!.updateAuthor(
                     selectedAuthor.id,
                     name.text.toString(),
                     age.text.toString().toInt(),
-                    literaryGenre.toString()
+                    literaryGenre.text.toString()
                 )
-                mainActivity.updateAllAuthorsList()
-
-                if(updateAuthorResponse) showSnackBar("Autor ${name.text} actualizado")
+                goToActivity(MainActivity::class.java)
             }
         }
 
     }
 
-    private fun showSnackBar(text: String) {
-        val snack = Snackbar.make(
-            findViewById(R.id.view_create_update_author),
-            text,
-            Snackbar.LENGTH_INDEFINITE
-        )
-        snack.show()
+    private fun goToActivity(
+        activityClass: Class<*>
+    ) {
+        val intent = Intent(this, activityClass)
+        startActivity(intent)
     }
 }

@@ -25,7 +25,7 @@ class SqliteHelper(
                 title VARCHAR(100),
                 description VARCHAR(200),
                 author_id INTEGER,
-                FOREIGN KEY (author_id) REFERENCES AUTHOR(id)
+                FOREIGN KEY (author_id) REFERENCES AUTHOR(id) ON DELETE CASCADE
             );
         """.trimIndent()
 
@@ -107,6 +107,20 @@ class SqliteHelper(
         writeDB.close()
 
         return updateResult != -1
+    }
+
+    fun deleteAuthor(id:Int):Boolean{
+        val writeDB = writableDatabase
+        // SQL query example: where .... ID=? AND NAME=? [?=1, ?=2]
+        val parametersDeleteQuery = arrayOf(id.toString())
+        val deleteResult = writeDB.delete(
+            "AUTHOR",
+            "id=?",
+            parametersDeleteQuery
+        )
+        writeDB.close()
+
+        return deleteResult != -1
     }
 
 }

@@ -1,5 +1,6 @@
 package com.example.a03_android_app
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,6 +11,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
+import androidx.appcompat.app.AlertDialog
 
 class MainActivity : AppCompatActivity() {
 
@@ -63,7 +65,7 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
             R.id.mi_delete_author -> {
-
+                openDialog(allAuthors[selectedRegisterPosition].id)
                 return true
             }
             else -> super.onContextItemSelected(item)
@@ -83,10 +85,20 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun updateAllAuthorsList() {
-        allAuthors.clear()
-        allAuthors.addAll(DataBase.tables!!.getAllAuthors())
-        adapter!!.notifyDataSetChanged()
+    fun openDialog(registerIndex: Int) {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("¿Está seguro de eliminar el autor?")
+        builder.setPositiveButton(
+            "Eliminar"
+        ) { _, _ ->
+            DataBase.tables!!.deleteAuthor(registerIndex)
+            allAuthors.clear()
+            allAuthors.addAll(DataBase.tables!!.getAllAuthors())
+            adapter!!.notifyDataSetChanged()
+        }
+        builder.setNegativeButton("Cancelar", null)
+
+        builder.create().show()
     }
 
 }
