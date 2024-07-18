@@ -64,6 +64,35 @@ class SqliteHelper(
         return response
     }
 
+    fun getBooksByAuthor(author_id: Int):ArrayList<BookEntity> {
+        val lectureDB =readableDatabase
+        val queryScript ="""
+            SELECT * FROM BOOK WHERE author_id=?
+        """.trimIndent()
+        val queryResult = lectureDB.rawQuery(
+            queryScript,
+            arrayOf(author_id.toString())
+        )
+        val response = arrayListOf<BookEntity>()
+
+        if(queryResult.moveToFirst()) {
+            do {
+                response.add(
+                    BookEntity(
+                        queryResult.getInt(0),
+                        queryResult.getString(1),
+                        queryResult.getString(2),
+                        queryResult.getInt(3)
+                    )
+                )
+            } while(queryResult.moveToNext())
+        }
+        queryResult.close()
+        lectureDB.close()
+
+        return response
+    }
+
     fun createAuthor(
         name: String,
         age: Int,
@@ -77,6 +106,27 @@ class SqliteHelper(
 
         val storeResult = writeDB.insert(
             "AUTHOR", // Table name
+            null,
+            valuesToStore // Values to insert
+        )
+        writeDB.close()
+
+        return storeResult.toInt() != -1
+    }
+
+    fun createBook(
+        title: String,
+        description: String,
+        author_id: Int
+    ): Boolean {
+        val writeDB = writableDatabase
+        val valuesToStore = ContentValues()
+        valuesToStore.put("title", title)
+        valuesToStore.put("description", description)
+        valuesToStore.put("author_id", author_id)
+
+        val storeResult = writeDB.insert(
+            "BOOK", // Table name
             null,
             valuesToStore // Values to insert
         )
@@ -99,7 +149,7 @@ class SqliteHelper(
 
         val parametersUpdateQuery = arrayOf(id.toString())
         val updateResult = writeDB.update(
-            "AUTHOR", // Nombre de la tabla
+            "AUTHOR", // Table name
             valuesToUpdate,
             "id=?",
             parametersUpdateQuery
@@ -109,12 +159,50 @@ class SqliteHelper(
         return updateResult != -1
     }
 
-    fun deleteAuthor(id:Int):Boolean{
+    fun updateBook(
+        id: Int,
+        title: String,
+        description: String,
+        author_id: Int
+    ): Boolean {
+        val writeDB = writableDatabase
+        val valuesToUpdate = ContentValues()
+        valuesToUpdate.put("title", title)
+        valuesToUpdate.put("description", description)
+        valuesToUpdate.put("author_id", author_id)
+
+        val parametersUpdateQuery = arrayOf(id.toString())
+        val updateResult = writeDB.update(
+            "BOOK", // Table name
+            valuesToUpdate,
+            "id=?",
+            parametersUpdateQuery
+        )
+        writeDB.close()
+
+        return updateResult != -1
+    }
+
+    fun deleteAuthor(id:Int): Boolean {
         val writeDB = writableDatabase
         // SQL query example: where .... ID=? AND NAME=? [?=1, ?=2]
         val parametersDeleteQuery = arrayOf(id.toString())
         val deleteResult = writeDB.delete(
             "AUTHOR",
+            "id=?",
+            parametersDeleteQuery
+        )
+        writeDB.close()
+
+        return deleteResult != -1
+    }
+
+    fun deleteBook(id:Int): Boolean {
+        val writeDB = writableDatabase
+        // SQL query example: where .... ID=? AND NAME=? [?=1, ?=2]
+        val parametersDeleteQuery = arrayOf(id.toString())
+        val deleteResult = writeDB.delete(
+            "BOOK",
             "id=?",
             parametersDeleteQuery
         )

@@ -3,6 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/mi_author_books"
+        android:title="Ver libros" />
+    <item
         android:id="@+id/mi_edit_author"
         android:title="Editar autor" />
     <item

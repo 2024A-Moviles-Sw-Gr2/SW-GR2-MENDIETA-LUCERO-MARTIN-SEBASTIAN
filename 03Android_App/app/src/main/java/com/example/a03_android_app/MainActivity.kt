@@ -1,6 +1,5 @@
 package com.example.a03_android_app
 
-import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -68,6 +67,10 @@ class MainActivity : AppCompatActivity() {
                 openDialog(allAuthors[selectedRegisterPosition].id)
                 return true
             }
+            R.id.mi_author_books -> {
+                goToActivity(BooksList::class.java, allAuthors[selectedRegisterPosition])
+                return true
+            }
             else -> super.onContextItemSelected(item)
         }
     }
@@ -85,7 +88,7 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun openDialog(registerIndex: Int) {
+    private fun openDialog(registerIndex: Int) {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("¿Está seguro de eliminar el autor?")
         builder.setPositiveButton(
