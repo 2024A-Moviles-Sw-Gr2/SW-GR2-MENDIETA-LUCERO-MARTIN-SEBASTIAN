@@ -59,9 +59,15 @@ class MainActivity : AppCompatActivity() {
 
         // Inicializar Base de Datos
         EBaseDeDatos.tablaEntrenador = ESqliteHelperEntrenador(this)
+
         val botonSqlite = findViewById<Button>(R.id.btn_sqlite)
         botonSqlite.setOnClickListener{
             irActividad(ECrudEntrenador::class.java)
+        }
+
+        val botonRView = findViewById<Button>(R.id.btn_recycler_view)
+        botonRView.setOnClickListener {
+            irActividad(FRecyclerView::class.java)
         }
     }
 
