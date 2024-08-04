@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "777291178205",
+    "project_id": "recreateapp-recyclerview",
+    "storage_bucket": "recreateapp-recyclerview.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:777291178205:android:3d7224b03f0c3d01f0fb34",
+        "android_client_info": {
+          "package_name": "com.example.a04_recreateapp_recyclerview"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKbzHK3-U6aPXcwUCqmGge53cg7qpFBrY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

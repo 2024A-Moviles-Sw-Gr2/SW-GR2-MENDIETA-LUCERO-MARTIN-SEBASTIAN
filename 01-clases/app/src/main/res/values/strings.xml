@@ -5,4 +5,5 @@
         <item>Miércoles</item>
     </string-array>
     <string name="app_name">2024ASWGR2MM</string>
+    <string name="title_activity_google_maps_inicio">GoogleMapsInicio</string>
 </resources>
