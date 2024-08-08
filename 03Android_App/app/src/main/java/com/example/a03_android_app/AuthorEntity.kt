@@ -7,13 +7,16 @@ class AuthorEntity(
     var id: Int,
     var name: String,
     var age: Int,
-    var literary_genre: String
+    var literary_genre: String,
+    var latitude: String,
+    var longitude: String
 ): Parcelable {
-
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readString()!!,
         parcel.readInt(),
+        parcel.readString()!!,
+        parcel.readString()!!,
         parcel.readString()!!
     ) {
     }
@@ -23,6 +26,8 @@ class AuthorEntity(
         parcel.writeString(name)
         parcel.writeInt(age)
         parcel.writeString(literary_genre)
+        parcel.writeString(latitude)
+        parcel.writeString(longitude)
     }
 
     override fun describeContents(): Int {
@@ -42,5 +47,4 @@ class AuthorEntity(
     override fun toString():String {
         return "$id - $name"
     }
-
 }

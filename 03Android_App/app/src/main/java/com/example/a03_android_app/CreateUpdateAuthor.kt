@@ -17,6 +17,8 @@ class CreateUpdateAuthor : AppCompatActivity() {
         val name = findViewById<EditText>(R.id.input_author_name)
         val age = findViewById<EditText>(R.id.input_author_age)
         val literaryGenre = findViewById<EditText>(R.id.input_author_literary_genre)
+        val latitude = findViewById<EditText>(R.id.latitude)
+        val longitude = findViewById<EditText>(R.id.longitude)
         val selectedAuthor = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             intent.getParcelableExtra("selectedAuthor", AuthorEntity::class.java)
         } else {
@@ -30,7 +32,9 @@ class CreateUpdateAuthor : AppCompatActivity() {
                 DataBase.tables!!.createAuthor(
                     name.text.toString(),
                     age.text.toString().toInt(),
-                    literaryGenre.text.toString()
+                    literaryGenre.text.toString(),
+                    latitude.text.toString(),
+                    longitude.text.toString()
                 )
                 goToActivity(MainActivity::class.java)
             }
@@ -38,6 +42,8 @@ class CreateUpdateAuthor : AppCompatActivity() {
             name.setText(selectedAuthor.name)
             age.setText(selectedAuthor.age.toString())
             literaryGenre.setText(selectedAuthor.literary_genre)
+            latitude.setText(selectedAuthor.latitude)
+            longitude.setText(selectedAuthor.longitude)
 
             // Update an author
             val btnCreateUpdateAuthor = findViewById<Button>(R.id.btn_create_update_author)
@@ -46,7 +52,9 @@ class CreateUpdateAuthor : AppCompatActivity() {
                     selectedAuthor.id,
                     name.text.toString(),
                     age.text.toString().toInt(),
-                    literaryGenre.text.toString()
+                    literaryGenre.text.toString(),
+                    latitude.text.toString(),
+                    longitude.text.toString()
                 )
                 goToActivity(MainActivity::class.java)
             }

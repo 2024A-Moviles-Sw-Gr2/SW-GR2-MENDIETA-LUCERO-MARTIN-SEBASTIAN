@@ -15,7 +15,9 @@ class SqliteHelper(
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name VARCHAR(100),
                 age INTEGER,
-                literary_genre VARCHAR(50)
+                literary_genre VARCHAR(50),
+                latitude VARCHAR(50),
+                longitude VARCHAR(50)
             );
         """.trimIndent()
 
@@ -53,7 +55,9 @@ class SqliteHelper(
                         queryResult.getInt(0),
                         queryResult.getString(1),
                         queryResult.getInt(2),
-                        queryResult.getString(3)
+                        queryResult.getString(3),
+                        queryResult.getString(4),
+                        queryResult.getString(5)
                     )
                 )
             } while(queryResult.moveToNext())
@@ -96,13 +100,17 @@ class SqliteHelper(
     fun createAuthor(
         name: String,
         age: Int,
-        literary_genre: String
+        literary_genre: String,
+        latitude: String,
+        longitude: String
     ): Boolean {
         val writeDB = writableDatabase
         val valuesToStore = ContentValues()
         valuesToStore.put("name", name)
         valuesToStore.put("age", age)
         valuesToStore.put("literary_genre", literary_genre)
+        valuesToStore.put("latitude", latitude)
+        valuesToStore.put("longitude", longitude)
 
         val storeResult = writeDB.insert(
             "AUTHOR", // Table name
@@ -139,13 +147,17 @@ class SqliteHelper(
         id: Int,
         name: String,
         age: Int,
-        literary_genre: String
+        literary_genre: String,
+        latitude: String,
+        longitude: String
     ): Boolean {
         val writeDB = writableDatabase
         val valuesToUpdate = ContentValues()
         valuesToUpdate.put("name", name)
         valuesToUpdate.put("age", age)
         valuesToUpdate.put("literary_genre", literary_genre)
+        valuesToUpdate.put("latitude", latitude)
+        valuesToUpdate.put("longitude", longitude)
 
         val parametersUpdateQuery = arrayOf(id.toString())
         val updateResult = writeDB.update(

@@ -11,12 +11,11 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="104dp"
         android:fontFamily="sans-serif-light"
         android:text="CREAR / EDITAR AUTOR"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,7 +23,7 @@
         android:id="@+id/input_author_name"
         android:layout_width="225dp"
         android:layout_height="63dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="28dp"
         android:ems="10"
         android:hint="Ingrese el nombre"
         android:inputType="text"
@@ -62,9 +61,35 @@
         android:id="@+id/btn_create_update_author"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="44dp"
         android:text="Guardar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/longitude" />
+
+    <EditText
+        android:id="@+id/latitude"
+        android:layout_width="229dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="Latitud de ubicación"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.505"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/input_author_literary_genre" />
+
+    <EditText
+        android:id="@+id/longitude"
+        android:layout_width="230dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="24dp"
+        android:ems="10"
+        android:hint="Longitud de ubicación"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/latitude" />
 </androidx.constraintlayout.widget.ConstraintLayout>
