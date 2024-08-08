@@ -60,7 +60,6 @@ class GoogleMapsActivity : AppCompatActivity() {
              with(googleMap) {
                  mapa = googleMap
                  establecerConfiguracionMapa()
-                 establecerConfiguracionMapa()
                  moverQuicentro()
                  anadirPolilinea()
                  anadirPoligono()
@@ -69,7 +68,7 @@ class GoogleMapsActivity : AppCompatActivity() {
         }
     }
 
-    fun  escucharListeners(){
+    fun escucharListeners(){
         mapa.setOnPolygonClickListener {
             mostrarSnackbar("setOnPolygonClickListener $it.tag")
         }
