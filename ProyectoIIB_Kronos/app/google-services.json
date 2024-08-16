@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "762427314274",
+    "project_id": "proyectoiib-kronos",
+    "storage_bucket": "proyectoiib-kronos.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:762427314274:android:7d57c4bc15679563b1813b",
+        "android_client_info": {
+          "package_name": "com.example.proyectoiib_kronos"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnbPZCTbPw89vhW47IYDRyfRoAwOdisTY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
